@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: chzzkbot
+    version: 0.0.1
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5432/guribot
+    username: guribot
+    password: guribot
+  session:
+    jdbc:
+      initialize-schema: always
+  security:
+    user:
+      name: guribot
+      password: guribot
+server:
+  port: 8080
+security:
+  allowed-uris: /, /admin, /test
+logging:
+  level:
+    org.springframework.messaging: trace
+    org.springframework.web.socket: trace
+
+Chzzk:
+  NID_AUT: QgT35YgPxLQimeu+e0vJEHpqQnaeLZBoqVhs6mzj7xbgplpH8ITCofxqJqQCDBEB
+  NID_SES: AAABhNAfuKDIWGR76QjfEb1xGeIK5XQuWutHi+uonzPvSb55R9kI1cOsp8CrkvekkGs5o0eKb5mAPy0g+slhdddSMKxsz3JMWufxTgjb4DR6ZObzdx0l79J2y+G7wbWIhe3UVJuKO3cQTxG79xVilVZ9rimuvadVNinOaPzbSPZv6UpiGo2vzrv5ajoHY1I6JB/0Rz6jYBbvKGkW4vX/5bpdZRaEQfUmvmYhBOlqTwHrafzLLK/Yc0i9ZP0aHf6ma7tGM3BqeKczNb2fJ4Q/qD9+TAguJ51MYZ0R+2g6i/WdwmP883gQv9I5QdusB1VAz2XXnd04bjkgOKv8taT+/p+HWmR9t8u30CsCogVn5oKkTA1dT9Oy6/2YcuQU7vY+I+b/cVRxOoI4k8b8nXrQrwcU5v+lIq1neIvN10IAHDY+fDG58klpIWntmHY4Yjo0cIHQ0VG7he4BVZBreLtrYZqEZ85NyM53gDX2VVFr0RzO0N02J6YsTQ8HtTGLYaxN72Ynzk/K4oOek0ZeGQ4rrDWWJ9I=
+  ChannelName: 뮤로나
+  #ChannelId: 448acb33aff5339a08540f0d9e8e2652
+  URL:
+    chzzkBaseURL: https://api.chzzk.naver.com/
+    gameBaseURL: https://comm-api.game.naver.com/
+    naverBaseURL: https://apis.naver.com/
+user:
+  agent: chzzkBot/0.0.1 (Spring-boot)
