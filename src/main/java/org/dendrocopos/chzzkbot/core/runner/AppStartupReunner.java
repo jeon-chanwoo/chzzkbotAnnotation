@@ -43,10 +43,10 @@ public class AppStartupReunner implements ApplicationRunner {
 
     private WebSocketClient websocketclient;
 
-    @Value("${Chzzk.ChannelName}")
+    @Value("${Chzzk.ChannelName}")//스프링 부트영역??
     private String channelName;
 
-    public AppStartupReunner(ChzzkServices chzzkServices, WebSocketClient websocketclient) {
+    public AppStartupReunner(ChzzkServices chzzkServices, WebSocketClient websocketclient) {// AppStartupReunner생성자
         this.chzzkServices = chzzkServices;
         this.websocketclient = websocketclient;
         this.gson = new Gson();
@@ -59,11 +59,11 @@ public class AppStartupReunner implements ApplicationRunner {
          * 채널 검색
          */
         String searchChannelInfo = chzzkServices.reqChzzk("service/v1/search/channels?keyword=" + channelName + "&offset=0&size=13&withFirstChannelContent=false")
-                .block();
+                .block();//chzzkServices를 이용하여 정보를 가지고 온 후 블록화?
         log.info("channelSearch : {}", searchChannelInfo);
 
         HashMap<String, LinkedTreeMap<String, List<LinkedTreeMap<String, Object>>>> searchChannelData = gson.fromJson(searchChannelInfo, HashMap.class);
-        processChannelSearch(searchChannelData);
+        processChannelSearch(searchChannelData);//아래에 정의되어 있음 
 
         /**
          * UID 가져오기
@@ -71,8 +71,8 @@ public class AppStartupReunner implements ApplicationRunner {
 
         String searchMyInfo = chzzkServices.reqGame("nng_main/v1/user/getUserStatus").block();
         HashMap myInfoContent = gson.fromJson(searchMyInfo, HashMap.class);
-        if (myInfoContent.get("code").toString().equals("200.0")) {
-            myInfo = ((LinkedTreeMap) myInfoContent.get("content"));
+        if (myInfoContent.get("code").toString().equals("200.0")) {//현재상태를 가지고와서 200.0과 같은지 확인
+            myInfo = ((LinkedTreeMap) myInfoContent.get("content"));//현재 나의 상태를 저장 (아마 방송중인지 체크같음)
             log.info("search myInfo : {}", myInfo);
         }
 
@@ -119,7 +119,7 @@ public class AppStartupReunner implements ApplicationRunner {
 
     public void processSendMessage(String message) {
 
-        int serverId = Math.abs(chatChannelInfo.get("chatChannelId").toString().chars().reduce(0, Integer::sum)) % 9 + 1;
+        int serverId = Math.abs(chatChannelInfo.get("chatChannelId").toString().chars().reduce(0, Integer::sum)) % 9 + 1;//1~9
         HashMap pongCmd = new HashMap();
         pongCmd.put("cmd", ChatCmd.PONG.getValue());
         pongCmd.put("ver", "2");
@@ -296,7 +296,7 @@ public class AppStartupReunner implements ApplicationRunner {
     }
 
     private void processChannelSearch(HashMap<String, LinkedTreeMap<String, List<LinkedTreeMap<String, Object>>>> searchChannelData) {
-        for (String key : searchChannelData.keySet()) {
+        for (String key : searchChannelData.keySet()) {//키값비교해서 채널 찾기
             if (CONTENT.equals(key)) {
                 LinkedTreeMap<String, List<LinkedTreeMap<String, Object>>> content = searchChannelData.get(CONTENT);
 

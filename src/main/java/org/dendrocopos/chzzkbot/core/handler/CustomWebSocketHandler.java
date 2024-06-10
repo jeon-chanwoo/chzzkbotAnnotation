@@ -8,7 +8,7 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @Component
-public class CustomWebSocketHandler implements WebSocketHandler {
+public class CustomWebSocketHandler implements WebSocketHandler {//인터페이스인 WebSocketHandler를 가지고 와서 CustomWebSocketHandler를 구현
     @Override
     public Mono<Void> handle(WebSocketSession session) {
         return session.receive()

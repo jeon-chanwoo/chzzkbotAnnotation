@@ -11,7 +11,7 @@ public enum ErrorCode {
     NOT_FOUND_TOKEN(601,"NOT_FOUND_TOKEN")
     ;
 
-    ErrorCode(int code, String message) {
+    ErrorCode(int code, String message) {//생성자는 호출될때 생성되니 생성자보다 아래에 정의 해줘도 된다.
         this.code = code;
         this.message = message;
     }
